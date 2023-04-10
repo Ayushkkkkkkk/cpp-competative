@@ -7,14 +7,16 @@ using namespace std;
 #define eni(x) sim > typename \
   enable_if<sizeof dud<c>(0) x 1, debug&>::type operator<<(c i) {
 sim > struct rge { c b, e; };
-sim > rge<c> range(c i, c j) { return rge<c>{i, j}; }
+sim > rge<c> range(c i, c j) { return rge<c> {i, j}; }
 sim > auto dud(c* x) -> decltype(cerr << *x, 0);
 sim > char dud(...);
 struct debug {
 #ifdef LOCAL
-~debug() { cerr << endl; }
-eni(!=) cerr << boolalpha << i; ris; }
-eni(==) ris << range(begin(i), end(i)); }
+  ~debug() { cerr << endl; }
+  eni( != ) cerr << boolalpha << i; ris;
+}
+eni( == ) ris << range(begin(i), end(i));
+}
 sim, class b dor(pair < b, c > d) {
   ris << "(" << d.first << ", " << d.second << ")";
 }
@@ -25,7 +27,7 @@ sim dor(rge<c> d) {
   ris << "]";
 }
 #else
-sim dor(const c&) { ris; }
+  sim dor(const c&) { ris; }
 #endif
 };
 #define imie(...) " [" << #__VA_ARGS__ ": " << (__VA_ARGS__) << "] "
@@ -37,6 +39,6 @@ int main() {
   freopen("error.txt", "w", stderr);
 #endif
   int a;
-  cin>>a;
-  debug()<<imie(a);  
+  cin >> a;
+  debug() << imie(a);
 }

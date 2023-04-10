@@ -1,3 +1,4 @@
+
 namespace number_theory {
 	ll gcd(ll x, ll y) {
 	  if (x == 0) return y;

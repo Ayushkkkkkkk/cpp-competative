@@ -1,41 +1,43 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long 
+#define ll long long
 
 
 template<typename Node, typename Update>
 struct SegTree {
 	vector<Node> tree;
-	vector<ll> arr; 
+	vector<ll> arr;
 	int n;
 	int s;
-	SegTree(int a_len, vector<ll> &a) { 
+	SegTree(int a_len, vector<ll> &a) {
 		arr = a;
 		n = a_len;
 		s = 1;
-		while(s < 2 * n){
+		while (s < 2 * n) {
 			s = s << 1;
 		}
 		tree.resize(s); fill(all(tree), Node());
 		build(0, n - 1, 1);
 	}
-	void build(int start, int end, int index)  
-	{
+
+	void build(int start, int end, int index){
 		if (start == end)	{
 			tree[index] = Node(arr[start]);
 			return;
 		}
 		int mid = (start + end) / 2;
 		build(start, mid, 2 * index);
-		build(mid + 1, end, 2 * index + 1);:
+		build(mid + 1, end, 2 * index + 1);
 		tree[index].merge(tree[2 * index], tree[2 * index + 1]);
 	}
-	void update(int start, int end, int index, int query_index, Update &u)  
+	
+	void update(int start, int end, int index, int query_index, Update &u)
 	{
 		if (start == end) {
 			u.apply(tree[index]);
-			return;		}
+			return;
+		}
 		int mid = (start + end) / 2;
 		if (mid >= query_index)
 			update(start, mid, 2 * index, query_index, u);
@@ -43,7 +45,7 @@ struct SegTree {
 			update(mid + 1, end, 2 * index + 1, query_index, u);
 		tree[index].merge(tree[2 * index], tree[2 * index + 1]);
 	}
-	Node query(int start, int end, int index, int left, int right) { 
+	Node query(int start, int end, int index, int left, int right) {
 		if (start > right || end < left)
 			return Node();
 		if (start >= left && end <= right)
@@ -55,8 +57,8 @@ struct SegTree {
 		ans.merge(l, r);
 		return ans;
 	}
-	void make_update(int index, ll val) {  
-		Update new_update = Update(val); 
+	void make_update(int index, ll val) {
+		Update new_update = Update(val);
 		update(0, n - 1, 1, index, new_update);
 	}
 	Node make_query(int left, int right) {
@@ -87,19 +89,5 @@ struct Update1 {
 	}
 };
 
-
-void solver(){
-	segtree a ;
-	segtree b ;
-}
-
-
-int main(){
-	int t ;
-	cin>>t;
-	while(t--){
-		solver();
-	}
-}
 
 
